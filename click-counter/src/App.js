@@ -15,6 +15,7 @@ class App extends Component {
 				<button data-test="increment-button" onClick={() => this.setState({ counter: this.state.counter + 1 })}>
 					Increment!
 				</button>
+				<button data-test="decrement-button"></button>
 			</div>
 		)
 	}
