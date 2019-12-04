@@ -14,7 +14,9 @@ Enzyme.configure({ adapter: new EnzymeAdapter() })
  * @returns {ShallowWrapper}
  */
 const setup = (props = {}, state = null) => {
-	return shallow(<App {...props} />)
+	const wrapper = shallow(<App {...props} />)
+	if (state) wrapper.setState(state)
+	return wrapper
 }
 
 /**
