@@ -6,22 +6,43 @@ import App from './App'
 
 Enzyme.configure({ adapter: new EnzymeAdapter() })
 
+/**
+ * Factory function to create a ShallowWrapper for the App component
+ * @function setup
+ * @param {object} props - Component props specific to this setup
+ * @param {any} state - Initial state for setup
+ * @returns {ShallowWrapper}
+ */
+const setup = (props = {}, state = null) => {
+	return shallow(<App {...props} />)
+}
+
+/**
+ * Return ShallowWrapper containing node(s) with the given data-test value
+ * @param {ShallowWrapper} wrapper - Enzyme ShallowWrapper to search in
+ * @param {string} val - value of data-test to search by
+ * @returns {ShallowWrapper}
+ */
+const findByTestAttr = (wrapper, val) => {
+	return wrapper.find(`[data-test="${val}"]`)
+}
+
 test('renders without crashing', () => {
-	const wrapper = shallow(<App />)
-	const appComponent = wrapper.find("[data-test='component-app']")
+	const wrapper = setup()
+	const appComponent = findByTestAttr(wrapper, 'component-app')
 	expect(appComponent.length).toBe(1)
 })
 
 test('renders increment button', () => {
-	const wrapper = shallow(<App />)
-	const appComponent = wrapper.find("[data-test='increment-button']")
-	expect(appComponent.length).toBe(1)
+	const wrapper = setup()
+	const button = findByTestAttr(wrapper, 'increment-button')
+	expect(button.length).toBe(1)
 })
 
 test('renders counter display', () => {
-	const wrapper = shallow(<App />)
-	const appComponent = wrapper.find("[data-test='counter-display']")
-	expect(appComponent.length).toBe(1)
+	const wrapper = setup()
+	const display = findByTestAttr(wrapper, 'counter-display')
+	expect(display.length).toBe(1)
 })
 
 test('counter starts at 0', () => {})
