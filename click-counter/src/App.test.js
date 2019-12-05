@@ -88,3 +88,11 @@ test('decrement button does not decrement below 0', () => {
 	const display = findByTestAttr(wrapper, 'counter-display')
 	expect(display.text()).toContain(0)
 })
+
+test('decrementing lower than zero displays error', () => {
+	const wrapper = setup()
+	const button = findByTestAttr(wrapper, 'decrement-button')
+	button.simulate('click')
+	const error = findByTestAttr(wrapper, 'error-display')
+	expect(error.length).toBe(1)
+})
