@@ -80,3 +80,11 @@ test('decrement button decrements counter display', () => {
 	const display = findByTestAttr(wrapper, 'counter-display')
 	expect(display.text()).toContain(counter - 1)
 })
+
+test('decrement button does not decrement below 0', () => {
+	const wrapper = setup()
+	const button = findByTestAttr(wrapper, 'decrement-button')
+	button.simulate('click')
+	const display = findByTestAttr(wrapper, 'counter-display')
+	expect(display.text()).toContain(0)
+})
