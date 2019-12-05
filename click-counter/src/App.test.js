@@ -96,3 +96,13 @@ test('decrementing lower than zero displays error', () => {
 	const error = findByTestAttr(wrapper, 'error-display')
 	expect(error.length).toBe(1)
 })
+
+test('incrementing back up after displaying the error removes error', () => {
+	const wrapper = setup()
+	const decrementButton = findByTestAttr(wrapper, 'decrement-button')
+	decrementButton.simulate('click')
+	const incrementButton = findByTestAttr(wrapper, 'increment-button')
+	incrementButton.simulate('click')
+	const error = findByTestAttr(wrapper, 'error-display')
+	expect(error.length).toBe(0)
+})
